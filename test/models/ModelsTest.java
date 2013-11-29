@@ -24,16 +24,42 @@ public class ModelsTest extends WithApplication {
         assertEquals("Bob", bob.name);
     }
 
+    @Test
     public void createAndRetrieveProject() {
+    	User bob = new User("bob@gmail.com", "Bob", "secret");
+        bob.save();
 
+        Project project = Project.create("Testo", 4, bob.id);
+
+        List<Project> results = Project.findOwnedProjects(bob.id);
+        assertEquals(1, results.size());
+        assertEquals("Testo", results.get(0).name);
     }
 
+    @Test
     public void createAndRetrieveTrack() {
+    	User bob = new User("bob@gmail.com", "Bob", "secret");
+        bob.save();
 
+        Project project = Project.create("Testo", 4, bob.id);
+        Track t1 = Track.create(project);
+
+        List<Track> results = Track.findAssignedTracks(bob.id);
+        assertEquals(1, results.size());
+        assertEquals("TRACK 1", results.get(0).title);   
     }
 
     public void createAndRetrieveNote() {
-    	
+    	User bob = new User("bob@gmail.com", "Bob", "secret");
+        bob.save();
+
+        Project project = Project.create("Testo", 4, bob.id);
+        Note note = new Note();
+        note.title = "TITLE";
+        note.text = "BODY";
+        project.notes.add(note);
+
+        
     }
 
     @Test

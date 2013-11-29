@@ -5,6 +5,8 @@
 
 create table note (
   id                        bigint not null,
+  track_id                  bigint not null,
+  title                     varchar(255),
   text                      varchar(255),
   constraint pk_note primary key (id))
 ;
@@ -47,18 +49,6 @@ create table project_user (
   user_id                        bigint not null,
   constraint pk_project_user primary key (project_id, user_id))
 ;
-
-create table project_note (
-  project_id                     bigint not null,
-  note_id                        bigint not null,
-  constraint pk_project_note primary key (project_id, note_id))
-;
-
-create table track_note (
-  track_id                       bigint not null,
-  note_id                        bigint not null,
-  constraint pk_track_note primary key (track_id, note_id))
-;
 create sequence note_seq;
 
 create sequence project_seq;
@@ -67,26 +57,20 @@ create sequence track_seq;
 
 create sequence user_seq;
 
-alter table project add constraint fk_project_owner_1 foreign key (owner_id) references user (id) on delete restrict on update restrict;
-create index ix_project_owner_1 on project (owner_id);
-alter table track add constraint fk_track_assignedTo_2 foreign key (assigned_to_id) references user (id) on delete restrict on update restrict;
-create index ix_track_assignedTo_2 on track (assigned_to_id);
-alter table track add constraint fk_track_project_3 foreign key (project_id) references project (id) on delete restrict on update restrict;
-create index ix_track_project_3 on track (project_id);
+alter table note add constraint fk_note_track_1 foreign key (track_id) references track (id) on delete restrict on update restrict;
+create index ix_note_track_1 on note (track_id);
+alter table project add constraint fk_project_owner_2 foreign key (owner_id) references user (id) on delete restrict on update restrict;
+create index ix_project_owner_2 on project (owner_id);
+alter table track add constraint fk_track_assignedTo_3 foreign key (assigned_to_id) references user (id) on delete restrict on update restrict;
+create index ix_track_assignedTo_3 on track (assigned_to_id);
+alter table track add constraint fk_track_project_4 foreign key (project_id) references project (id) on delete restrict on update restrict;
+create index ix_track_project_4 on track (project_id);
 
 
 
 alter table project_user add constraint fk_project_user_project_01 foreign key (project_id) references project (id) on delete restrict on update restrict;
 
 alter table project_user add constraint fk_project_user_user_02 foreign key (user_id) references user (id) on delete restrict on update restrict;
-
-alter table project_note add constraint fk_project_note_project_01 foreign key (project_id) references project (id) on delete restrict on update restrict;
-
-alter table project_note add constraint fk_project_note_note_02 foreign key (note_id) references note (id) on delete restrict on update restrict;
-
-alter table track_note add constraint fk_track_note_track_01 foreign key (track_id) references track (id) on delete restrict on update restrict;
-
-alter table track_note add constraint fk_track_note_note_02 foreign key (note_id) references note (id) on delete restrict on update restrict;
 
 # --- !Downs
 
@@ -98,11 +82,7 @@ drop table if exists project;
 
 drop table if exists project_user;
 
-drop table if exists project_note;
-
 drop table if exists track;
-
-drop table if exists track_note;
 
 drop table if exists user;
 

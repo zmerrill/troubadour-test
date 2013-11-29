@@ -1,0 +1,219 @@
+# Users
+
+- &paul !!models.User
+    email:      paul@example.com
+    name:       paul
+    password:   secret
+
+- &john !!models.User
+    email:      john@example.com
+    name:       john
+    password:   secret
+
+- &george !!models.User
+    email:      george@example.com
+    name:       george
+    password:   secret
+
+- &ringo !!models.User
+    email:      ringo@example.com
+    name:       ringo
+    password:   secret
+
+# Projects
+
+- &yesterday !!models.Project
+    name:       Yesterday
+    trackCount: 2
+    owner: *john
+    collaborators:
+        - *john
+        - *paul
+
+- &glassonion !!models.Project
+    name:       Glass Onion
+    trackCount: 4
+    owner: *john
+    collaborators:
+        - *john
+        - *paul
+        - *george
+        - *ringo
+
+- &help !!models.Project
+    name:       A Little Help From My Friends
+    trackCount: 4
+    owner: *ringo
+    collaborators:
+        - *john
+        - *paul
+        - *ringo
+        - *george
+
+- &blackbird !!models.Project
+    name:       Blackbird
+    trackCount: 1
+    owner: *paul
+    collaborators:
+        - *paul
+
+- &weeps !!models.Project
+    name:      While My Guitar Gently Weeps
+    trackCount: 4
+    owner: *george
+    collaborators:
+        - *john
+        - *paul
+        - *george
+        - *ringo
+
+- &ticket !!models.Project
+    name:       Ticket To Ride
+    trackCount: 4
+    owner: *john
+    collaborators:
+        - *john
+        - *paul
+        - *george
+        - *ringo
+
+- &strawberry !!models.Project
+    name:       Strawberry Fields Forever
+    trackCount: 8
+    owner: *john
+    collaborators:
+        - *john
+        - *paul
+        - *george
+        - *ringo
+
+- &penny !!models.Project
+    name:       Penny Lane
+    trackCount: 7
+    owner: *paul
+    collaborators:
+        - *john
+        - *paul
+        - *george
+        - *ringo
+
+- &prudence !!models.Project
+    name:       Dear Prudence
+    trackCount: 1
+    owner: *john
+    collaborators:
+        - *john
+
+- &something !!models.Project
+    name:       Something
+    trackCount: 6
+    owner: *george
+    collaborators:
+        - *john
+        - *paul
+        - *george
+        - *ringo
+
+- &submarine !!models.Project
+    name:       Yellow Submarine
+    trackCount: 4
+    owner: *ringo
+    collaborators:
+        - *john
+        - *paul
+        - *george
+        - *ringo
+
+# Task
+
+- !!models.Track
+    title:      yesterday - guitar
+    project:    *yesterday
+    assignedTo: *john
+
+- !!models.Track
+    title:      yesterday - vocals
+    project:    *yesterday
+    assignedTo: *paul
+
+- !!models.Track
+    title:      blackbird - vocals/guitar
+    project:    *blackbird
+    assignedTo: *paul
+
+- !!models.Track
+    title:      submarine - vocals
+    project:    *submarine
+    assignedTo: *ringo
+
+- !!models.Track
+    title:      submarine - guitar
+    project:    *submarine
+    assignedTo: *john
+
+- !!models.Track
+    title:      submarine - guitar lead
+    project:    *submarine
+    assignedTo: *george
+
+- !!models.Track
+    title:      submarine - bass
+    project:    *submarine
+    assignedTo: *paul
+
+- !!models.Track
+    title:      something - vocals/guitar
+    project:    *something
+    assignedTo: *george
+
+- !!models.Track
+    title:      something - guitar
+    project:    *something
+    assignedTo: *john
+
+- !!models.Track
+    title:      something - guitar lead
+    project:    *something
+    assignedTo: *george
+
+- !!models.Track
+    title:      something - bass
+    project:    *something
+    assignedTo: *paul
+
+- !!models.Track
+    title:      something - drums
+    project:    *something
+    assignedTo: *ringo
+
+- !!models.Track
+    title:      strawberry - bass
+    project:    *strawberry
+    assignedTo: *paul
+
+- !!models.Track
+    title:      strawberry - vocals/guitar
+    project:    *strawberry
+    assignedTo: *john
+
+- !!models.Track
+    title:      strawberry - guitar
+    project:    *strawberry
+    assignedTo: *john
+
+- !!models.Track
+    title:      strawberry - guitar lead
+    project:    *strawberry
+    assignedTo: *george
+
+- !!models.Track
+    title:      strawberry - horns
+    project:    *strawberry
+    assignedTo: *paul
+
+- !!models.Track
+    title:      strawberry - drums
+    project:    *strawberry
+    assignedTo: *ringo
+
+

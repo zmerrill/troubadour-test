@@ -3,6 +3,7 @@ package models;
 import javax.persistence.*;
 import play.db.ebean.*;
 import com.avaje.ebean.*;
+import java.util.*;
 
 @Entity
 public class User extends Model {
@@ -32,5 +33,21 @@ public class User extends Model {
     public static User authenticate(String email, String password) {
         return find.where().eq("email", email)
             .eq("password", password).findUnique();
+    }
+
+    public static List<User> findFriends(Long userId){
+        List<UserRelationship> rel = UserRelationship.findRelationships(userId);
+        List<User> friends = new ArrayList<User>();
+        for(UserRelationship r : rel){
+          Long friendId = null;
+          if(r.u1.id.equals(userId))
+            friendId = r.u2.id;
+          else
+            friendId = r.u1.id;
+
+          User buddy = User.find.byId(friendId);
+          friends.add(buddy);
+        }
+        return friends;
     }
 }

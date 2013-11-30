@@ -49,17 +49,52 @@ public class ModelsTest extends WithApplication {
         assertEquals("TRACK 1", results.get(0).title);   
     }
 
+    @Test
     public void createAndRetrieveNote() {
     	User bob = new User("bob@gmail.com", "Bob", "secret");
         bob.save();
 
         Project project = Project.create("Testo", 4, bob.id);
-        Note note = new Note();
-        note.title = "TITLE";
-        note.text = "BODY";
-        project.notes.add(note);
+        Note pNote = Note.create(project);
+        pNote.title = "TITLE";
+        pNote.text = "BODY";
+        Track t1 = Track.create(project);
+        Note tNote1 = Note.create(t1);
+        tNote1.title = "TITLE";
+        tNote1.text = "BODY";
+        Note tNote2 = Note.create(t1);
+        tNote2.title = "TITLE";
+        tNote2.text = "BODY";
 
-        
+        List<Note> pNotes = Note.findProjectNotes(project.id);
+        List<Note> tNotes = Note.findTrackNotes(t1.id);
+        List<Note> allNotes = Note.find.all();
+
+        assertEquals(1, pNotes.size());
+        assertEquals(2, tNotes.size());
+        assertEquals(3, allNotes.size());
+    }
+
+    @Test
+    public void createAndRetrieveRelationship() {
+    	User bob = new User("bob@gmail.com", "Bob", "secret");
+        bob.save();
+        User joe = new User("joe@gmail.com", "Joe", "secret");
+        joe.save();
+        User jim = new User("jim@gmail.com", "Jim", "secret");
+        jim.save();
+
+        UserRelationship.create(bob, joe);
+        UserRelationship.create(bob, jim);
+
+        List<UserRelationship> bobs = UserRelationship.findRelationships(bob.id);
+        List<UserRelationship> jims = UserRelationship.findRelationships(jim.id);
+
+        assertEquals(1, jims.size());
+        assertEquals(2, bobs.size());
+
+        List<User> joes = User.findFriends(joe.id);
+        assertEquals(1, joes.size());
     }
 
     @Test

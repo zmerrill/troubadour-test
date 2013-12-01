@@ -32,6 +32,10 @@ public class Project extends Model {
         return project;
     }
 
+    public static void delete(Long id){
+
+    }
+
     public static List<Project> findInvolving(Long user) {
         return find.where()
             .eq("collaborators.id", user)

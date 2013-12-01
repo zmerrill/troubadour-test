@@ -82,6 +82,9 @@ public class ProjectAPI extends Controller {
           return badRequest(result);
         } else {
           Project project = Project.create(name, 4, id);
+          for(int i = 0; i < tracksToCreate; i++){
+            Track track = Track.create(project);
+          }
           result.put("status", "OK");
           result.put("message", "Hello " + id);
           result.put("projects", Json.toJson(project));
@@ -110,6 +113,6 @@ public class ProjectAPI extends Controller {
 
     @BodyParser.Of(BodyParser.Json.class)
     public static Result deleteProjectById() {
-        
+        return ok("HJI");
     }
 }

@@ -38,4 +38,8 @@ public class Track extends Model {
         track.save();
         return track;
     }
+
+    public static void delete(Long id){
+
+    }
 }

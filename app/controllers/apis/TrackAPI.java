@@ -10,7 +10,7 @@ import play.mvc.BodyParser;
 import views.html.*;
 import java.util.*;
 
-public class ProjectAPI extends Controller {
+public class TrackAPI extends Controller {
 
   	@BodyParser.Of(BodyParser.Json.class)
   	public static Result getAssignedTracks() {
@@ -24,7 +24,7 @@ public class ProjectAPI extends Controller {
           result.put("message", "Missing parameter [name]");
           return badRequest(result);
         } else {
-          List<Track> tracks = Track.findAssignedTracks.(id);
+          List<Track> tracks = Track.findAssignedTracks(id);
           result.put("status", "OK");
           result.put("message", "Hello " + id);
           result.put("projects", Json.toJson(tracks));
@@ -44,7 +44,7 @@ public class ProjectAPI extends Controller {
       		result.put("message", "Missing parameter [name]");
       		return badRequest(result);
     		} else {
-    			List<Track> tracks = Track.findProjectTracks.(id);
+    			List<Track> tracks = Track.findProjectTracks(id);
       		result.put("status", "OK");
       		result.put("message", "Hello " + id);
       		result.put("projects", Json.toJson(tracks));
@@ -93,6 +93,6 @@ public class ProjectAPI extends Controller {
 
     @BodyParser.Of(BodyParser.Json.class)
     public static Result deleteTrackById() {
-        
+        return ok("fas");
     }
 }

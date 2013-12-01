@@ -107,4 +107,9 @@ public class ProjectAPI extends Controller {
           return ok(result);
         }
     }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result deleteProjectById() {
+        
+    }
 }

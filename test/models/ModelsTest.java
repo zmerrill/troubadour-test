@@ -13,7 +13,7 @@ public class ModelsTest extends WithApplication {
     @Before
     public void setUp() {
         start(fakeApplication(inMemoryDatabase()));
-        Ebean.save((List) Yaml.load("test-data.yml"));
+        //Ebean.save((List) Yaml.load("test-data.yml"));
     }
 
     @Test
@@ -108,11 +108,6 @@ public class ModelsTest extends WithApplication {
 
     @Test
     public void fullTest() {
-
-        // Count things
-        assertEquals(4, User.find.findRowCount());
-        assertEquals(11, Project.find.findRowCount());
-        assertEquals(18, Track.find.findRowCount());
 
         // Try to authenticate as users
         assertNotNull(User.authenticate("paul@example.com", "secret"));

@@ -21,7 +21,6 @@ public class Project extends Model {
         this.name = name;
         this.trackCount = trackCount;
         this.owner = owner;
-        this.collaborators.add(owner);
     }
 
     public static Model.Finder<Long,Project> find = new Model.Finder(Long.class, Project.class);

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.apis;
 
 import play.*;
 import play.mvc.*;
@@ -10,13 +10,9 @@ import play.mvc.BodyParser;
 import views.html.*;
 import java.util.*;
 
-public class API extends Controller {
+public class ProjectAPI extends Controller {
 
-    public static Result index() {
-        return ok(index.render("Your new application is ready."));
-    }
-
-    @BodyParser.Of(BodyParser.Json.class)
+  @BodyParser.Of(BodyParser.Json.class)
 	public static Result sayHello() {
   		JsonNode json = request().body().asJson();
   		ObjectNode result = Json.newObject();
@@ -71,4 +67,44 @@ public class API extends Controller {
     		return ok(result);
   		}
 	}
+
+  @BodyParser.Of(BodyParser.Json.class)
+  public static Result createProject() {
+      JsonNode json = request().body().asJson();
+      ObjectNode result = Json.newObject();
+      Long id = json.findPath("userId").asLong();
+      Integer tracksToCreate = json.findPath("trackCount").asInt();
+      String name = json.findPath("name").textValue();
+      
+      if(id == null || tracksToCreate == null || name == null) {
+        result.put("status", "KO");
+        result.put("message", "Missing parameter");
+        return badRequest(result);
+      } else {
+        Project project = Project.create(name, 4, id);
+        result.put("status", "OK");
+        result.put("message", "Hello " + id);
+        result.put("projects", Json.toJson(project));
+        return ok(result);
+      }
+  }
+
+  @BodyParser.Of(BodyParser.Json.class)
+  public static Result findProjectById() {
+      JsonNode json = request().body().asJson();
+      ObjectNode result = Json.newObject();
+      Long id = json.findPath("projectId").asLong();
+      
+      if(id == null) {
+        result.put("status", "KO");
+        result.put("message", "Missing parameter");
+        return badRequest(result);
+      } else {
+        Project project = Project.find.byId(id);
+        result.put("status", "OK");
+        result.put("message", "Found project: " + project.name);
+        result.put("projects", Json.toJson(project));
+        return ok(result);
+      }
+  }
 }

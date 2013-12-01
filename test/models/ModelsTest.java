@@ -124,7 +124,7 @@ public class ModelsTest extends WithApplication {
 
         // Find all Bob's collaborations
         List<Project> collaborations = Project.findInvolving(id);
-        assertEquals(10, collaborations.size());
+        assertEquals(8, collaborations.size());
 
         // Find all Bob's projects
         List<Project> projects = Project.findOwnedProjects(id);

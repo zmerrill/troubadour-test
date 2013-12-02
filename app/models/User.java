@@ -11,7 +11,7 @@ public class User extends Model {
     @Id
     public Long id;
     public String email;
-    public String name;
+    private String name;
     public String password;
     public String state;
     public String city;
@@ -19,6 +19,14 @@ public class User extends Model {
     public String genres;
     public String soundsLike;
     public String bio;
+
+    public String getName(){
+      return this.name;
+    }
+
+    public void setName(String name){
+      this.name = name;
+    }
     
     public User(String email, String name, String password) {
       this.email = email;

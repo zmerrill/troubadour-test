@@ -1,7 +1,43 @@
-@(message: String)
+@(myProjects: List[Project], myCollabs: List[Project], myFriends: List[User])
 
-@main("Welcome to Play") {
+@main("Troubadour Collaborations") {
 
-    @play20.welcome(message, style = "Java")
+    <header>
+        <hgroup>
+            <h1>Dashboard</h1>
+            
+        </hgroup>
+    </header>
+
+    <article  class="projects">
+    	<h2>Projects</h2>
+        <ul class="list">
+	        @myProjects.map { project =>
+	            <li data-track-id="@project.id">
+	                <h4>@project.name</h4>
+	            </li>
+	        }
+         </ul>
+         <h2>Collaborations</h2>
+        <ul class="list">
+	        @myCollabs.map { project =>
+	            <li data-track-id="@project.id">
+	                <p>@project.name</p>
+	                <span class="projectOwner">by @project.owner.getName()</span>
+	            </li>
+	        }
+         </ul>
+         <h2>Friends</h2>
+        <ul class="list">
+	        @myFriends.map { user =>
+	            <li data-track-id="@user.id">
+	                <h4>@user.getName()</h4>
+	                @if(user.email != null) {
+	                	<span class="userEmail">@user.email</span>
+	                }
+	            </li>
+	        }
+         </ul>
+    </article>
 
 }

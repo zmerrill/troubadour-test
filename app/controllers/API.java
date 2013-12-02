@@ -12,10 +12,6 @@ import java.util.*;
 
 public class API extends Controller {
 
-    public static Result index() {
-        return ok(index.render("Your new application is ready."));
-    }
-
     @BodyParser.Of(BodyParser.Json.class)
 	public static Result sayHello() {
   		JsonNode json = request().body().asJson();

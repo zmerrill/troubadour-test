@@ -12,10 +12,12 @@ public class Project extends Model {
     public String name;
     public int trackCount;
     public int bpm;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     public User owner;
     @ManyToMany(cascade = CascadeType.REMOVE)
     public List<User> collaborators = new ArrayList<User>();
+    @OneToMany(mappedBy="project")
+    public List<Track> tracks = new ArrayList<Track>();
 
     public Project(String name, int trackCount, User owner) {
         this.name = name;

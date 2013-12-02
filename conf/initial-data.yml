@@ -20,6 +20,31 @@
     name:       ringo
     password:   secret
 
+# User Relationships
+- !!models.UserRelationship
+    u1: *john
+    u2: *paul
+
+- !!models.UserRelationship
+    u1: *john
+    u2: *george
+
+- !!models.UserRelationship
+    u1: *john
+    u2: *ringo
+
+- !!models.UserRelationship
+    u1: *paul
+    u2: *george
+
+- !!models.UserRelationship
+    u1: *paul
+    u2: *ringo
+
+- !!models.UserRelationship
+    u1: *george
+    u2: *ringo
+
 # Projects
 
 - &yesterday !!models.Project

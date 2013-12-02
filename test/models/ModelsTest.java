@@ -107,6 +107,16 @@ public class ModelsTest extends WithApplication {
     }
 
     @Test
+    public void ownerNameTest() {
+        User bob = new User("bob@gmail.com", "Bob", "secret");
+        bob.save();
+
+        Project project = Project.create("Testo", 4, bob.id);
+        assertEquals(project.owner.id, bob.id);
+        assertEquals(project.owner.name, bob.name);
+    }
+
+    @Test
     public void fullTest() {
 
         // Try to authenticate as users
